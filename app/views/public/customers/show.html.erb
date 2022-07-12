@@ -1,0 +1,60 @@
+  <div class="container">
+   <div class="row">
+    <div class="col-md-8 offset-md-4 mt-5 ">
+    
+    <table>
+      <tr>
+        <th><h1><%= @customer.full_name %></h1></th>
+        <th></th>
+        <td><% if @customer.email ==!'guestda@example.com' %>
+          <%= link_to "Edit",edit_customer_path,class: "btn btn-success" %>
+          <% else %>
+          <td></td>
+          <% end %>
+          </td>
+      </tr>
+      <tr>
+        <td><%= image_tag @customer.get_image(350,350) %></td>
+      </tr>
+    </table>
+    </div>
+    
+      <div class="col-md-8 offset-md-4 mt-5 ">
+      <table>
+      <tr>
+        <th><h2>Favolite List<i class="far fa-kiss-wink-heart"></i></h2></th>
+         <td><h2><%= "(#{@favorite_list.count})" %></h2></td>
+      </tr>
+      <tr>
+        <th>
+        <% if @favorite_list.present? %>
+          <% @favorite_list.each do |post|%>
+          <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image(200,200) %>
+          <% end %>
+          <% end %>
+        <% end %>
+      </th>
+    </tr>
+</table>
+   </div>
+  </div>
+</div>
+
+<style>
+  
+  .container{ background-image: url("<%= asset_path('IMG_4443.PNG') %>");　
+  
+  background-size:cover;
+ 
+	background-repeat: no-repeat;
+  background-position: center;
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
+  width:780px;
+  height:700px;
+  margin-left: auto;
+  margin-right: auto;
+ }
+ 
+</style>

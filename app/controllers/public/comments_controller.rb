@@ -1,0 +1,19 @@
+class Public::CommentsController < ApplicationController
+    
+    def create
+          @comment = current_customer.comments.new(comment_params)
+          @post = @comment.post
+        if @comment.save
+             redirect_to posts_path(@post.id)
+        end
+    end
+    
+    private
+    
+    def comment_params
+        params.require(:comment).permit(:comment_content, :post_id)
+    
+    end
+    
+end
+    

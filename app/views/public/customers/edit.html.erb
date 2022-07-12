@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-4 mt-5 ">
+    <h2>Edit Customer</h2>
+    
+    <%= form_with model: @customer, url: customer_path(@customer.id) do |f| %>
+        
+    <div class="form-group" >
+        <div class="d-flex p-2 bd-highlight">
+        <strong><%= f.label "Profile Image" %></strong>
+            <%= f.file_field :image, accept: "image/*" %>
+        </div>
+    </div>
+        
+    <div class="form-group" >
+        <div class="d-flex p-2 bd-highlight">
+        <strong><%= f.label "name" %></strong>
+            <%= f.text_field :last_name %>
+            <%= f.text_field :first_name %>
+        </div>
+    </div>
+    <div class="d-flex p-2 bd-highlight">
+        <%= f.submit "Up Date", class: "btn btn-primary" %>
+    </div>
+    <div class="d-flex p-2 bd-highlight">
+
+        <%= link_to "Withdrawal", customers_withdraw_path, data: {confirm: "本当に退会しますか？"}, class: "btn btn-danger" %>
+    </div>
+        <% end %>
+     </div>
+  </div>
+</div>
+
+<style>
+.container{ background-image: url("<%= asset_path('IMG_4443.PNG') %>");　
+  height: 4000px;
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
+  width:780px;
+  height:700px;
+  margin-left: auto;
+  margin-right: auto;
+ }
+       
+
+</style>

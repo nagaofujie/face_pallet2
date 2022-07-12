@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FacePallet</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  
+
+  <body>
+     <% if customer_signed_in? %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+   <%= link_to "Face Pallet", homes_top_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      <%= link_to "Your Information",customer_path(current_customer.id), class:"nav-link" %>
+
+      </li>
+      <li class="nav-item active">
+      <%= link_to "Create Post", new_post_path, class:"nav-link" %>
+
+      </li>
+    
+      <li class="nav-item active">
+       <%= link_to "Post List", posts_path, class:"nav-link" %>
+      </li>
+      
+       <li class="nav-item active">
+        <%= link_to "Log Out", destroy_customer_session_path, method: :delete, class: "nav-link text-white" %>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+</nav>
+<% elsif admin_signed_in? %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-info">
+  <a class="navbar-brand" href="#">Face Palette administrator screen</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      <%= link_to "Customers",admin_customers_path, class:"nav-link" %>
+
+      </li>
+      <li class="nav-item active">
+      <%= link_to "Comment List", admin_comments_path, class:"nav-link" %>
+
+      </li>
+    
+      <li class="nav-item active">
+       <%= link_to "Post List", posts_path, class:"nav-link" %>
+      </li>
+      
+       <li class="nav-item active">
+        <%= link_to "Log Out", destroy_admin_session_path, method: :delete, class: "nav-link text-white" %>
+      </li>
+    </div>
+</nav>
+<% else %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+   <%= link_to "Face Pallet", homes_top_path, class: "navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+      <%= link_to "Post List",  posts_path, class:"nav-link" %>
+
+    
+      <li class="nav-item active">
+       <%= link_to "Sign Up", new_customer_registration_path, class:"nav-link" %>
+      </li>
+      
+       <li class="nav-item active">
+        <%= link_to "Log In", customer_session_path, class: "nav-link text-white" %>
+      </li>
+      
+      <li class="nav-item active">
+        <%= link_to "Guest Log In",  customers_guest_sign_in_path, method: :post, class: "nav-link text-white" %>
+      </li>
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+</nav>
+<% end %>
+    <%= yield %>
+  </body>
+</html>

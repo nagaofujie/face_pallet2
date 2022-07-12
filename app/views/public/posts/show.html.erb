@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-4 mt-5 ">
+     <table>
+        <tr>
+          <th><%= @post.title %></th>
+        </tr>
+        <tr>
+          <td><%= image_tag @post.get_image(780,780) %></td>
+        </tr>
+        <tr>
+          <th><%= @post.introduction %></th>
+        </tr>
+        <tr>
+          <th></th>
+          <% if @post.customer == current_customer %>
+          <th><%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-primary" %></th>
+          <th><%= link_to "Destroy", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger" %></th>
+          <% else %>
+          <th></th>
+          <th></th>
+          <% end %>
+         </tr>
+         </table>
+         </div>
+        
+        <div class="col-md-8 offset-md-4 mt-5 ">
+        <table>
+         <tr>
+         
+          <th>
+            <% if @post.favorited?(current_customer) %>
+              <%= link_to post_favorite_path(@post.id), method: :delete do %>
+                <span style="color:red;">❤︎</span>
+              <% end %>
+            <% else %>
+              <%= link_to post_favorites_path(@post.id), method: :post do %>
+                <span>❤︎</span>
+              <% end %>
+            <% end %>
+            <%= "(#{@post.favorites.count})"%>
+          </th>
+        </table>
+        </div>
+    
+          
+          
+          <div class="col-md-8 offset-md-4 mt-5 ">
+          <table> 
+          <th>
+          <%= form_with model:[@post, @comment], method: :post do |f| %>
+              <%= f.text_area :comment_content %>
+              <%= f.hidden_field :post_id, value: @post.id %><br>
+              <%= f.submit "Create Comment", class: "btn btn-success"%>
+            <% end %>
+          </th>
+         </tr>
+         </table>
+         </div>
+         
+      <div class="col-md-8 offset-md-4 mt-5 ">
+      <div class="d-flex p-2 bd-highlight"><strong><h4>Comments</h4></strong><%=="(#{@comments.count})"%></div>
+      <div class="table">
+        <table>
+          <% @comments.each do |comment| %>
+           <tr>
+             <td><%= link_to customer_path(comment.customer.id) do %>
+               <%= image_tag comment.customer.get_image(200,100) %>
+               <% end %><br>
+               <%= comment.customer.full_name %>
+               </td>
+             <td><%= comment.comment_content %></td>
+           </tr>
+           <tr></tr>
+           <% end %>
+         </table>
+        </div>
+      </div>
+   </div>
+</div>
+
+<style>
+ 
+ .container{ background-image: url("<%= asset_path('IMG_4449.PNG') %>");　
+  background-size:cover;
+  background-position: center;
+  background-color:rgba(255,255,255,0.8);
+  background-blend-mode:lighten;
+  width:100%;
+  height:auto;
+ }
+ </style>

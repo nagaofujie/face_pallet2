@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-4 mt-5 ">
+        
+      <%#= form_tag(search_tag_path,:method => 'get') do %>
+         <%#= text_field_tag :search %>
+     <%#= submit_tag "Search", :name => nil %>
+    <%# end %>
+
+        <strong><h1>Tags</h1></strong>
+        
+        <% @tag_list.each do |list|%>
+        <h2>#<%= link_to list.name,search_tag_path(tag_id: list.id) %>
+        <%="(#{list.posts.count})" %></h2><% end %>
+        
+      
+      </div>
+    </div>
+ </div>
+ 
+ <style>
+ 
+ .container{ background-image: url("<%= asset_path('IMG_4450.PNG') %>");　
+  background-size:cover;
+  background-position: center;
+  background-color:rgba(255,255,255,0.5);
+  background-blend-mode:lighten;
+  width:auto;
+  height:1200px;
+ }
+ </style>
