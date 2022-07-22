@@ -1,33 +1,26 @@
-
 <div class="container">
   <div class="row">
     <div class="col-lg-4 offset-lg-4 mt-5 ">
-      
-  
-<h2 class="text-center mb-5">Admin Log in</h2>
-
-      <div class="row justify-content-center">
-        <div class="col-13">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="field mb-3">
-          <strong><%= f.label :email %></strong>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <h2 class="text-center mb-5">Admin Log in</h2>
+        <div class="row justify-content-center">
+          <div class="col-13">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field mb-3">
+                <strong><%= f.label :email %></strong>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+              </div>
+              <div class="field mb-5">
+                <strong><%= f.label :password %></strong>
+                <%= f.password_field :password, autocomplete: "current-password" %>
+              </div>
+          </div>
         </div>
-      
-        <div class="field mb-5">
-          <strong><%= f.label :password %></strong>
-          <%= f.password_field :password, autocomplete: "current-password" %>
+        <div class="col text-center">
+          <div class="actions ">
+            <%= f.submit "Log in" , class: "btn btn-success" %>
+          </div>
         </div>
-      </div>
-        </div>
-    
-      <div class="col text-center">
-        <div class="actions ">
-          <%= f.submit "Log in" , class: "btn btn-success" %>
-        </div>
-       </div>
-      <% end %>
-      
+            <% end %>
       <%= render "admin/shared/links" %>
     </div>
   </div>

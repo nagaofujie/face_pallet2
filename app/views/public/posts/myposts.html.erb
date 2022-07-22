@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <table>
+                <tr>
+                    <th><h1 class="mt-5 mb-5"><%= @customer.full_name %></h1></th>
+                    <th></th>
+                    <td>
+                        <% if @customer.email != 'guest@example.com' && @customer == current_customer %>
+                            <%= link_to "Edit",edit_customer_path(@customer.id), class: "btn btn-success" %>
+                        <% else %>
+                            <td></td>
+                        <% end %>
+                    </td>
+                </tr>
+                <tr>
+                    <td><%= image_tag @customer.get_image(350,350) %></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-8"%>
+            <h2 class="text-center mt-5">My Posts</h2>
+                <table class="table mt-5 ml-5">
+                    <% @posts.each do |post| %>
+                        <tr>
+                            <th><%= link_to post_path(post.id) do %>
+                                <%= image_tag post.get_image(300,300) %>
+                                <% end %>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th><%= post.title %></th>
+                        </tr>
+                    <% end %>
+                </table>
+        </div>
+    </div>
+</div>

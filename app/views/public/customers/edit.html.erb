@@ -1,30 +1,25 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-4 mt-5 ">
-    <h2>Edit Customer</h2>
+    <div class="offset-lg-12 mt-5 ">
+    <h2 class="text-center mb-5">Edit Customer</h2>
     
     <%= form_with model: @customer, url: customer_path(@customer.id) do |f| %>
         
-    <div class="form-group" >
-        <div class="d-flex p-2 bd-highlight">
+    <div class="form-group mb-5" >
         <strong><%= f.label "Profile Image" %></strong>
             <%= f.file_field :image, accept: "image/*" %>
-        </div>
     </div>
         
-    <div class="form-group" >
-        <div class="d-flex p-2 bd-highlight">
+    <div class="form-group mb-5 pb-5" >
         <strong><%= f.label "name" %></strong>
-            <%= f.text_field :last_name %>
+            <%= f.text_field :last_name ,class: "mr-2"%>
             <%= f.text_field :first_name %>
-        </div>
     </div>
-    <div class="d-flex p-2 bd-highlight">
-        <%= f.submit "Up Date", class: "btn btn-primary" %>
-    </div>
-    <div class="d-flex p-2 bd-highlight">
-
-        <%= link_to "Withdrawal", customers_withdraw_path, data: {confirm: "本当に退会しますか？"}, class: "btn btn-danger" %>
+    
+   
+    <div class ="ml-5 pl-5">
+        <%= link_to "Withdrawal", customers_withdraw_path, data: {confirm: "本当に退会しますか？"}, class: "btn btn-danger ml-5 " %>
+        <%= f.submit "Up Date", class: "btn btn-primary ml-5" %>
     </div>
         <% end %>
      </div>

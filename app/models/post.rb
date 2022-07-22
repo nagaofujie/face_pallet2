@@ -17,7 +17,7 @@ class Post < ApplicationRecord
           image.attach(io: File.open(file_path),filename:"default-image.jpg",content_type: "image/jpg")
         end
         image.variant(resize_to_limit:[width, height]).processed
-     end
+    end
      
  def save_tag(sent_tags)
         current_tags = self.tags.pluck(:tag_list) unless self.tags.nil?
@@ -34,14 +34,10 @@ class Post < ApplicationRecord
     end
  end
  
-  def self.search(search)
-      if search
-        Post.where(['content LIKE ?', "%#{search}%"])
-      else
-        Post.all
-      end
-  end
-    
+def self.search(keyword)
+  where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])
+end
     
  
+
 end

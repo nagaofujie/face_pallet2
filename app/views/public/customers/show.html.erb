@@ -1,42 +1,37 @@
   <div class="container">
    <div class="row">
-    <div class="col-md-8 offset-md-4 mt-5 ">
+   
     
-    <table>
-      <tr>
-        <th><h1><%= @customer.full_name %></h1></th>
-        <th></th>
-        <td><% if @customer.email ==!'guestda@example.com' %>
-          <%= link_to "Edit",edit_customer_path,class: "btn btn-success" %>
-          <% else %>
-          <td></td>
-          <% end %>
-          </td>
-      </tr>
-      <tr>
-        <td><%= image_tag @customer.get_image(350,350) %></td>
-      </tr>
-    </table>
-    </div>
-    
-      <div class="col-md-8 offset-md-4 mt-5 ">
-      <table>
-      <tr>
-        <th><h2>Favolite List<i class="far fa-kiss-wink-heart"></i></h2></th>
-         <td><h2><%= "(#{@favorite_list.count})" %></h2></td>
-      </tr>
-      <tr>
-        <th>
-        <% if @favorite_list.present? %>
-          <% @favorite_list.each do |post|%>
-          <%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image(200,200) %>
-          <% end %>
-          <% end %>
+ <div class="col-md-5 mt-5 mb-3">
+ 
+     <div class="col-md-12 mt-5 mb-3"><h2><%= @customer.full_name %></h2></div>
+        
+       
+        <div class="col-md-12 mt-5"><%= image_tag @customer.get_image(350,350) %></div>
+        <% if @customer == current_customer %>
+          <div class="col-md-12"><%= link_to "My posts",  post_myposts_path(@posts), class: "btn btn-info mt-5" %>
         <% end %>
-      </th>
-    </tr>
-</table>
+          </div>
+          
+        <% if @customer.email != 'guest@example.com' && @customer == current_customer %>
+          <div class="col-md-12"><%= link_to "Edit",edit_customer_path(@customer.id), class: "btn btn-success mt-5" %></div>
+        <% else %>
+          <div></div>
+        <% end %>
+ </div>  
+ 
+  <div class="col-md-7 mt-5 mb-3">  
+      <div class="col-md-12 mb-5"><h2>Favolite List<i class="far fa-kiss-wink-heart"></i>
+          <%= "(#{@favorite_list.count})" %></h2></div>
+      
+      <div class="col-md-12"><% if @favorite_list.present? %>
+        <% @favorite_list.each do |post|%>
+          <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image(100,100) %>
+        <% end %>
+          <% end %>
+      <% end %>
+      </div>
    </div>
   </div>
 </div>

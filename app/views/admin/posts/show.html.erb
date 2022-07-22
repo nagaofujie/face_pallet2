@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4 mt-5 ">
+            <h2 class="text-center">
+                <%= @post.title%>
+            </h2>
+            <div class="block-center mt-5 mb-5">
+                <%= link_to admin_comment_path(@post.customer.id) do %>
+                    <%= image_tag @post.customer.get_image(1080,1080)%>
+                <% end %>
+            </div>
+            <h4><%= @post.introduction %></h4>
+                <% @post_tags.each do |tag| %>
+                    #<%= tag.name %>
+                <% end %>
+            <h5 class="mt-5 pt-5">投稿者:<%= link_to @post.customer.full_name, admin_customer_path(@post.customer.id) %></h5>
+         </div>
+    </div>
+</div>

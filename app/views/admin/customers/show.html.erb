@@ -1,39 +1,46 @@
 <h2 class="text-center mt-5"><%= @customer.full_name %>さんの会員詳細</h2>
-<table class="table mt-5">
-    <tr>
-        <th>会員ID</th>
-        <td><%= @customer.id%></td>
-    </tr>
-    <tr>
-        <th>メールアドレス</th>
-        <td><%= @customer.email %></td>
-    </tr>
-    <tr>
-        <th>会員ステータス</th>
-        <td><% if @customer.is_deleted == false  %>
-            <p class="text-success">有効</p>
-            <% else %>
-             <p class="text-danger">退会</p>
-             <% end %>
-        </td>
-    </tr>
-</table>
+    <table class="table mt-5">
+        <tr>
+            <th></th>
+            <th><%= image_tag @customer.get_image(200,200)%></th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>会員ID</th>
+            <td><%= @customer.id%></td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+            <th>会員ステータス</th>
+            <td><% if @customer.is_deleted == false  %>
+                <p class="text-success">有効</p>
+                <% else %>
+                 <p class="text-danger">退会</p>
+                 <% end %>
+            </td>
+        </tr>
+    </table>
 
-<h4 class="text-center mt-5">コメント一覧</h4>
-
-<table class="table">
-    <tr>
-        <th>投稿日</th>
-        <th>投稿のタイトル</th>
-        <th>投稿の内容</th>
-        <th>コメント内容</th>
-    </tr>
-    <% @comments.each do |comment| %>
-    <tr>
-        <td><%= comment.created_at %></td>
-        <td><%= comment.post.title %></td>
-        <td><%= comment.post.introduction %></td>
-        <td><%= comment.comment_content %></td>
-    </tr>
-    <% end %>
-</table>
+    <h4 class="text-center mt-5 mb-5">コメント一覧</h4>
+        <table class="table">
+            <tr>
+                <th>投稿日</th>
+                <th>投稿のタイトル</th>
+                <th>投稿の内容</th>
+                <th>コメント内容</th>
+                <th></th>
+            </tr>
+        <% @comments.each do |comment| %>
+            <tr>
+                <td><%= comment.created_at %></td>
+                <td><%= comment.post.title %></td>
+                <td><%= comment.post.introduction %></td>
+                <td><%= comment.comment_content %></td>
+                <td><%= link_to "削除", admin_comment_path(comment.id), method: :delete, data: {confirm: "削除しますか？"} ,class: "btn btn-danger"%></td>
+            </tr>
+        <% end %>
+            <%= paginate @comments %>
+        </table>

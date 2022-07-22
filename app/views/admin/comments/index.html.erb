@@ -1,0 +1,26 @@
+<h2 class="mt-5 text-center">コメント一覧</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>投稿日</th>
+                <th>会員名</th>
+                <th>コメントされた投稿名</th>
+                <th>コメント</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @comments.each do |comment| %>
+            <tr>
+                <td></td>
+                <td><%= comment.created_at %></td>
+                <td><%= link_to comment.customer.full_name, admin_customer_path(comment.customer.id) %></td>
+                <td><%= link_to comment.post.title, post_path(comment.post.id)%></td>
+                <td><%= comment.comment_content %></td>
+            </tr>
+            <% end %>
+          <%= paginate @comments%>
+        </tbody>
+    </table>
+    
+    

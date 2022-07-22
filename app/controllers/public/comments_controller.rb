@@ -4,7 +4,7 @@ class Public::CommentsController < ApplicationController
           @comment = current_customer.comments.new(comment_params)
           @post = @comment.post
         if @comment.save
-             redirect_to posts_path(@post.id)
+             redirect_to post_path(@post.id)
         end
     end
     

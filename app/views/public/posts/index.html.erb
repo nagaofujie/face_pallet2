@@ -1,31 +1,46 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-4 mt-5 ">
-        
-      <%#= form_tag(search_tag_path,:method => 'get') do %>
-         <%#= text_field_tag :search %>
-     <%#= submit_tag "Search", :name => nil %>
-    <%# end %>
-
-        <strong><h1>Tags</h1></strong>
-        
-        <% @tag_list.each do |list|%>
-        <h2>#<%= link_to list.name,search_tag_path(tag_id: list.id) %>
-        <%="(#{list.posts.count})" %></h2><% end %>
-        
-      
-      </div>
+    <div class="row">
+        <% if !@result_posts.nil? %> 
+            <div class="col-md-8 mt-5 ">
+                <div class="col-md-12"><h2 class="mb-5"><strong>検索結果</strong></h2>
+                    <% @result_posts.each do |post| %>
+                        <%= image_tag post.get_image(200,200) %><br>
+                        <strong><%= link_to post.title, post_path(post.id) %></strong>
+                    <% end %>
+                </div>
+            </div>
+        <% else %>
+            <div class="col-md-4 mt-5 "> 
+                <strong><h1 class="text-info">Tags</h1></strong>
+                    <% @tag_list.each do |list|%>
+                        <h2>#<%= link_to list.name, search_tag_path(tag_id: list.id) %>
+                            <%="(#{list.posts.count})" %>
+                        </h2>
+                    <% end %>
+            </div>
+            <div class="col-md-8 mt-5">
+                <strong><h1 class="text-info">Everyone's post</h1></strong>
+                    <% @posts.each do |post| %>
+                        <div class="row">
+                            <%= link_to post_path(post.id) do %>
+                                <div class="col-md-5 mt-5">
+                                <div class="col-md-12 mt-5"><%= image_tag post.get_image(200,200) %></div>
+                                </div>
+                            <% end %>
+                             
+                                <div class="col-md-7 mt-5">
+                                    <div class="col-md-12 mt-5">title:　<%= post.title %></div>
+                                    <div class="col-md-12 mt-5">introduction:　<%= post.introduction %></div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 mt-5 ml-3"><i class="fas fa-user"></i><%= post.customer.full_name %></div>
+                            <div class="col-md-2 mt-5"><i class="fas fa-comment"></i><%= "(#{post.comments.count})" %></div>
+                            <div class="col-md-2 mt-5"><i class="fas fa-heart"></i><%= "(#{post.favorites.count})" %></div>
+                        </div>
+                    <% end %>
+            <%= paginate @posts %>
+            </div>
+        <% end %>
     </div>
- </div>
- 
- <style>
- 
- .container{ background-image: url("<%= asset_path('IMG_4450.PNG') %>");　
-  background-size:cover;
-  background-position: center;
-  background-color:rgba(255,255,255,0.5);
-  background-blend-mode:lighten;
-  width:auto;
-  height:1200px;
- }
- </style>
+</div>

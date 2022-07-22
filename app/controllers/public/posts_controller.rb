@@ -7,6 +7,18 @@ def search_tag
     @posts = @tag.posts.page(params[:id]).per(10)
 end
 
+def search
+   @result_posts = Post.search(params[:keyword])
+   @tag_list = Tag.all
+   @keyword = params[:keyword]
+   render 'index'
+end
+
+def myposts
+    @posts = current_customer.posts.page(params[:page]).per(5)
+    @customer = current_customer
+end
+
 
 def create
     @post = Post.new(post_params)
@@ -25,16 +37,16 @@ def new
 end
 
 def index
-    @post = Post.new
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
-    @tag_list = Tag.all
+    @posts = Post.page(params[:page]).per(5)
+    @tag_list = Tag.page(params[:page]).per(20)
 end
 
 def show
     @post = Post.find(params[:id])
-    @post_tags = @post.tags
+    @tags = @post.tags
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.page(params[:page]).per(6)
+    
 end
 
 def edit
@@ -45,6 +57,7 @@ end
 def update
     @post = Post.find(params[:id])
     tag_list = params[:tag_list].split(nil)
+
     if @post.update(post_params)
         if params[:post][:status] == "公開"
         @old_relations = PostTag.where(post_id: @post.id)
