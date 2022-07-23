@@ -1,24 +1,34 @@
-# README
+# face_pallet
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
 
-Things you may want to cover:
+### サイトテーマ　  
+その人のお気に入りのメイクや、場面によってのメイク（パーティーメイク、春メイク etc）などのメイクを投稿する。パーソナルカラー別などに振り分けるなど
 
-* Ruby version
+## テーマを選んだ理由
 
-* System dependencies
+コロナの終わりが見え、マスクが外れる時期も近づいたということや、今の時代パーソナルカラーを理由に化粧品や服を選ぶ女性が増えたのでそんな人たちに役に立てばと思い作る事にしました。
 
-* Configuration
+### ターゲットユーザー 
 
-* Database creation
+・性別：男女問わずメイクに興味ある人. ・メイクをする人. ・流行に乗りたい方、メイクがマンネリ化して変化が欲しい人. メイクの仕方を覚えたい人など...
 
-* Database initialization
 
-* How to run the test suite
+### 主な利用シーン
+・メイクに興味がある学生や、ジェンダーレスの方がメイクの仕方を覚えたいとき. ・流行りのメイクや自分の可愛いと思ったメイク見つけておいてをブックマーク保存したい時. ・自分の持て余している化粧品の使い方を知りたい時
 
-* Services (job queues, cache servers, search engines, etc.)
+## 設計書
 
-* Deployment instructions
+<https://docs.google.com/spreadsheets/d/1WJY0aSJ_BtFmZ6feXyEHNe0z3Ma7mwFdArvHA4lA1uM/edit?usp=sharing>
 
-* ...
+## 開発環境
+
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JS ライブラリ：jQuery
+- IDE：Cloud9
+
+## 使用素材
+
+- 使用検討中です。
