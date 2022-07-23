@@ -59,16 +59,12 @@ def update
     tag_list = params[:tag_list].split(nil)
 
     if @post.update(post_params)
-        if params[:post][:status] == "公開"
         @old_relations = PostTag.where(post_id: @post.id)
         @old_relations.each do |relation|
-          relation.delete
+            relation.delete
         end
-       @post.save_tag(tag_list)
-       redirect_to post_path(@post.id)
-        else
-    render :edit
-        end
+        @post.save_tag(tag_list)
+        redirect_to post_path(@post.id)
     end
 end
 

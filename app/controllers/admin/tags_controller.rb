@@ -1,4 +1,6 @@
 class Admin::TagsController < ApplicationController
+    before_action :authenticate_admin!
+
     
 def destroy
    tag = Tag.find(params[:id])

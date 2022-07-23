@@ -6,11 +6,11 @@
                 <th>タグ名</th>
                 <th></th>
             </tr>
-        <% @tag_list.each do |list| %>
+          <% @tag_list.each do |list| %>
             <tr>
                 <td><%= list.created_at %></td>
                 <td><%= list.name %></td>
                 <td><%= link_to "削除",  admin_tag_path(list.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger" %></td>
             </tr>
-        <% end %>
+          <% end %>
         </table>

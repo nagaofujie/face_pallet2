@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mt-5 ">
-        <div class="col-md-12"><h2 class= "text-center mb-5"><%= @post.title%></h2></div>
+        <div class="col-md-12"><h2 class= "mb-5"><%= @post.title%></h2></div>
         <div class="col-md-12"><%= image_tag @post.get_image(500,500) %></div>
         <div class="col-md-12"><h4 class="text-center mt-5 mb-5"><%= @post.introduction %></h4></div>
         <div class="col-md-12">
@@ -9,41 +9,36 @@
             <h5>#<%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
             <% end %>
         </div>
-    
-    <div class="row">
-        <div class="col-md-5"> <% if @post.favorited?(current_customer) %>
-                <%= link_to post_favorite_path(@post.id), method: :delete do %>
-                  <span style="color:red;">❤︎</span>
-                <% end %>
-              <% else %>
-                <%= link_to post_favorites_path(@post.id), method: :post do %>
-                  <span>❤︎</span>
-                <% end %>
-              <% end %>
-              <span><%= "(#{@post.favorites.count})"%> </span></div>
-              
-                  <% if @post.customer == current_customer %>
-                <div class="col-md-3"><%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-primary mb-5 ml-5" %></div>
-                 <div class="col-md-3"><%= link_to "Destroy", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger mb-5" %></div>
-              <% else %>
-                <div></div>
-              <% end %>
-              
-            <div class="row">
-            <div class="col-md-12 mt-5 ">
-                <%= form_with model:[@post, @comment], method: :post do |f| %>
-                     <div class="col-md-12"><%= f.text_area :comment_content,  size: "50x5" %></div>
-                     <div class="col-md-12"><%= f.hidden_field :post_id, value: @post.id %></div>
-                     <div class="col-md-12 mt-3"><%= f.submit "Create Comment", class: "btn btn-success mb-5 "%></div>
+        <div class="row">
+            <div class="col-md-5"> <% if @post.favorited?(current_customer) %>
+                    <%= link_to post_favorite_path(@post.id), method: :delete do %>
+                      <span style="color:red;">❤︎</span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to post_favorites_path(@post.id), method: :post do %>
+                      <span>❤︎</span>
+                    <% end %>
                   <% end %>
-            </div>
-         </div>
-      </div>
+                  <span><%= "(#{@post.favorites.count})"%> </span></div>
+                  
+                      <% if @post.customer == current_customer %>
+                    <div class="col-md-3 mt-5"><%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-primary mb-5 ml-5" %></div>
+                     <div class="col-md-3 mt-5"><%= link_to "Destroy", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger mb-5" %></div>
+                  <% else %>
+                    <div></div>
+                  <% end %>
+                  
+                <div class="row">
+                    <div class="col-md-12 mt-5 ">
+                        <%= form_with model:[@post, @comment], method: :post do |f| %>
+                             <div class="col-md-12"><%= f.text_area :comment_content,  size: "50x5" %></div>
+                             <div class="col-md-12"><%= f.hidden_field :post_id, value: @post.id %></div>
+                             <div class="col-md-12 mt-3"><%= f.submit "Create Comment", class: "btn btn-success mb-5 "%></div>
+                          <% end %>
+                    </div>
+                </div>
+        </div>
     </div>
-    
- 
-
-              
     <div class="col-md-6 mt-5 ">
       <div class="col-md-12  "><h2 class="text-center mb-5">Comments<%="(#{@comments.count})"%></h2></div>
          <div class="row">
@@ -52,17 +47,15 @@
             <div class="col-md-3 mb-5 "><%= link_to customer_path(comment.customer.id) do %>
                 <%= image_tag comment.customer.get_image(200,100) %>
                <% end %><br>
-            <i class="fas fa-user"></i> <%= comment.customer.full_name %></div>
-             
+            <i class="fas fa-user"></i> <%= comment.customer.full_name %>
+            </div>
             <div class="col-md-9 mb-3"><h4><i class="fas fa-comment"></i><%= comment.comment_content %></h4></div>
-           
            <% end %>
-      </div>
+         </div>
       <%= paginate @comments %>
     </div>     
   </div>
 </div>
-
 <style>
  
  .container{ background-image: url("<%= asset_path('IMG_4449.PNG') %>");　

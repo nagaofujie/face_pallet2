@@ -7,8 +7,19 @@ class Post < ApplicationRecord
     has_many :post_tags, dependent: :destroy
     has_many :tags, through: :post_tags
     
+    validates :title,
+        length: { minimum: 1, maximun: 25}, presence: true
+    validates :introduction,
+        length: { minimum: 1, maximum: 140}, presence: true
+    validates :image,
+        presence: true
+    
     def favorited?(customer)
        favorites.where(customer_id: customer.id).exists?
+    end
+
+    def tags_field
+        tags.pluck(:name).join(' ')
     end
 
     def get_image(width, height)
