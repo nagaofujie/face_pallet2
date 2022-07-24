@@ -5,8 +5,15 @@ def index
 end
 
 def show
-    @post=Post.find(params[:id])
+    @post = Post.find(params[:id])
     @post_tags = @post.tags
+    @comments = @post.comments
+end
+
+def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to admin_posts_path
 end
 
 private

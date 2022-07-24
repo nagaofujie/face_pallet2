@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Admin::SessionsController < Devise::SessionsController
+  before_action :configure_permited_parameters
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -30,7 +32,7 @@ class Admin::SessionsController < Devise::SessionsController
    protected
    
   def configure_permited_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

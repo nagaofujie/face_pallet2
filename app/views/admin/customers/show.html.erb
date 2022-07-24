@@ -28,17 +28,18 @@
             <tr>
                 <th>投稿日</th>
                 <th>投稿のタイトル</th>
-                <th>投稿の内容</th>
                 <th>コメント内容</th>
                 <th></th>
             </tr>
         <% @comments.each do |comment| %>
             <tr>
                 <td><%= comment.created_at %></td>
-                <td><%= comment.post.title %></td>
-                <td><%= comment.post.introduction %></td>
+                <td><%= link_to admin_post_path(comment.post.id) do %>
+                        <%= comment.post.title %>
+                    <% end %>
+                </td>
                 <td><%= comment.comment_content %></td>
-                <td><%= link_to "削除", admin_comment_path(comment.id), method: :delete, data: {confirm: "削除しますか？"} ,class: "btn btn-danger"%></td>
+                <td></td>
             </tr>
         <% end %>
             <%= paginate @comments %>

@@ -1,19 +1,68 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-4 offset-lg-4 mt-5 ">
-            <h2 class="text-center">
-                <%= @post.title%>
-            </h2>
-            <div class="block-center mt-5 mb-5">
-                <%= link_to admin_comment_path(@post.customer.id) do %>
-                    <%= image_tag @post.customer.get_image(1080,1080)%>
-                <% end %>
+        <div class="col-lg-12 mt-5 ">
+         
+            <div class="col-lg-6">   
+                <div class="row">
+                    <h2 class="pl-5 ml-5"><%= @post.title%></h2>
+                <div class="mt-5 mb-5">
+                    <%= link_to admin_comment_path(@post.customer.id) do %>
+                        <%= image_tag @post.customer.get_image(500,500)%>
+                    <% end %>
+                </div>
+                <div class="col-lg-12 mt-5 ">
+                    <h4><%= @post.introduction %></h4>
+                </div>
+                <div class="col-lg-12 mt-5 ">
+                        <% @post_tags.each do |tag| %>
+                            #<%= tag.name %>
+                        <% end %>
+                </div>
+                
+                    <div class="col-lg-12">
+                        <div class="col-lg-6">
+                            <h5 class="mt-5 pt-5">投稿者:<%= link_to @post.customer.full_name, admin_customer_path(@post.customer.id) %></h5>
+                        </div>
+                        <div class="col-lg-6">
+                           <%= link_to "削除", admin_post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h4><%= @post.introduction %></h4>
-                <% @post_tags.each do |tag| %>
-                    #<%= tag.name %>
-                <% end %>
-            <h5 class="mt-5 pt-5">投稿者:<%= link_to @post.customer.full_name, admin_customer_path(@post.customer.id) %></h5>
-         </div>
+            <div class="col-lg-6">
+                        <div class="col-lg-12">
+                         <% @comments.each do |comment| %>
+                            <div class="box2">
+                                <div class="col-lg-8 mt-5"><br>
+                                    コメント：<h4><%= comment.comment_content %></h4>
+                                   <%= link_to "削除", admin_comment_path(comment.id), method: :delete, class: "btn btn-danger" %>
+                                </div>
+                                 <div class="col-lg-4 mt-5">
+                                    投稿者：<%= comment.customer.full_name %>
+                                </div>
+                            </div>
+                          <% end %>
+                        </div>
+                 </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .box2{
+        padding: 0.5em 1em;
+        margin: 2em 0;
+        font-weight: bold;
+        color: #6091d3;
+        background: #FFF;
+        border: solid 3px #6091d3;
+        border-radius: 10px;  
+    }
+    
+    .box2 p {
+        margin: 0; 
+        padding: 0;
+    }
+    
+</style>

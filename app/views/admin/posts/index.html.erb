@@ -5,14 +5,16 @@
             <th>投稿者</th>
             <th>タイトル</th>
             <th>内容</th>
+            <th></th>
         </tr>
         <% @posts.each do |post| %>
             <tr>
                 <td><%= post.id %></td>
-                <td><%= image_tag post.customer.get_image(300,300) %><br>
+                <td><%= image_tag post.customer.get_image(200,200) %><br>
                 <%= link_to post.customer.full_name, admin_customer_path(post.customer.id) %></td>
                 <td><%= link_to post.title, admin_post_path(post.id) %></td>
                 <td><%= post.introduction %></td>
+                <td></td>
             </tr>
         <% end %>
       <%= paginate @posts %>

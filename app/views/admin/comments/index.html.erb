@@ -7,6 +7,7 @@
                 <th>会員名</th>
                 <th>コメントされた投稿名</th>
                 <th>コメント</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -15,8 +16,9 @@
                 <td></td>
                 <td><%= comment.created_at %></td>
                 <td><%= link_to comment.customer.full_name, admin_customer_path(comment.customer.id) %></td>
-                <td><%= link_to comment.post.title, post_path(comment.post.id)%></td>
+                <td><%= link_to comment.post.title, admin_post_path(comment.post.id)%></td>
                 <td><%= comment.comment_content %></td>
+                <td><%= link_to "削除", admin_comment_path(comment.id), method: :delete, class: "btn btn-danger" %></td>
             </tr>
             <% end %>
           <%= paginate @comments%>

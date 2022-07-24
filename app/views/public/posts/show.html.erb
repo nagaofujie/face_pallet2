@@ -4,11 +4,20 @@
         <div class="col-md-12"><h2 class= "mb-5"><%= @post.title%></h2></div>
         <div class="col-md-12"><%= image_tag @post.get_image(500,500) %></div>
         <div class="col-md-12"><h4 class="text-center mt-5 mb-5"><%= @post.introduction %></h4></div>
-        <div class="col-md-12">
-            <% @tags.each do |tag| %>
-            <h5>#<%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
-            <% end %>
-        </div>
+        <div class="row">    
+            <div class="col-md-6 mt-5">
+                <% @tags.each do |tag| %>
+                <h5>#<%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
+                <% end %>
+            </div>
+            <div class="col-md-6 mt-5">
+                <%= link_to customer_path(@post.customer.id) do %>
+                <h5><i class="fas fa-user"></i>　
+                <%= @post.customer.full_name%>
+                <% end %>
+                </h5>
+            </div> 
+        </div> 
         <div class="row">
             <div class="col-md-5"> <% if @post.favorited?(current_customer) %>
                     <%= link_to post_favorite_path(@post.id), method: :delete do %>
@@ -42,7 +51,6 @@
     <div class="col-md-6 mt-5 ">
       <div class="col-md-12  "><h2 class="text-center mb-5">Comments<%="(#{@comments.count})"%></h2></div>
          <div class="row">
-
           <% @comments.each do |comment| %>
             <div class="col-md-3 mb-5 "><%= link_to customer_path(comment.customer.id) do %>
                 <%= image_tag comment.customer.get_image(200,100) %>
@@ -59,12 +67,10 @@
 <style>
  
  .container{ background-image: url("<%= asset_path('IMG_4449.PNG') %>");　
-  background-size:cover;
-  background-position: center;
-  background-color:rgba(255,255,255,0.8);
-  background-blend-mode:lighten;
-  width:100%;
-  height:auto;
+      background-size:cover;
+      background-position: center;
+      background-color:rgba(255,255,255,0.8);
+      background-blend-mode:lighten;
  }
   span{
     font-size:40px;

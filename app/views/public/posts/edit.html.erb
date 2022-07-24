@@ -1,26 +1,29 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-4 mt-5 ">
-        <strong><h1>Let's post makeup</h1></strong>
+    <div class="col-md-12 offset-md-2 mt-5 ">
+        <strong><h1 class="offset-md-3 mb-5 mt-5">Post Edit</h1></strong>
         <%= form_with model: @post, url: post_path(@post.id) do |f| %>
-        <div class="form-group" >
+        <div class="form-group mb-5" >
             <strong><%= f.label "Image" %></strong>
             <%= f.file_field :image, accept: "image/*" %>
         </div>
-        <div class="form-group" >
+        <div class="form-group mb-5" >
             <strong><%= f.label "Make Name" %></strong>
-            <%= f.text_field :title %>
+            <%= f.text_field :title, size: "50x5" %>
         </div>
-        <div class="form-group" >
+        <div class="form-group mb-5" >
             <strong><%= f.label "introduction" %></strong>
-            <%= f.text_area :introduction %>
+            <%= f.text_area :introduction, size: "50x5" %>
         </div>
-        <div class="form-group" >
+        <div class="form-group mb-5" >
             <strong><%= f.label "tags" %></strong>
-            <%= f.text_field :tags_field  %>
+            <%= f.text_field :tag_list, size: "50x5"  %><br>
+            <h6 class="offset-md-3">(Multiple possible(half-width space)</h6>
         </div>
-            <%= f.submit "Update Make Up", class: "btn btn-secondary"%>
+        <div class="offset-md-3">
+            <%= f.submit "Update Make Up", class: "btn btn-secondary mt-5"%>
         <% end %>
+        </div>
     </div>
   </div>
 </div>
@@ -33,5 +36,8 @@
   background-blend-mode:lighten;
   width:auto;
   height:1200px;
+ }
+ .h1{
+    
  }
 </style>
