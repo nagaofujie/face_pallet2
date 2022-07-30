@@ -4,7 +4,7 @@ class Public::SessionsController < Devise::SessionsController
   before_action :configure_permited_parameters
   before_action :customer_state, only: [:create]
   # before_action :configure_sign_in_params, only: [:create]
- 
+
   # GET /resource/sign_in
   # def new
   #   super
@@ -19,26 +19,26 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-  
+
   def guest_sign_in
     customer = Customer.guest
     sign_in customer
-    redirect_to root_path, notice: 'successfully logged in as a guest'
+    redirect_to customer_path(customer.id), notice: 'successfully logged in as a guest'
   end
-  
+
   private
-  
+
     def after_sign_in_path_for(resource)
-          root_path
+          customer_path(customer.id)
     end
-    
+
     def after_sign_out_path_for(resource)
           root_path
     end
 
 
    protected
-   
+
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
     return if !@customer
@@ -46,8 +46,8 @@ class Public::SessionsController < Devise::SessionsController
        redirect_to new_customer_session_path
      end
   end
-  
-   
+
+
   def configure_permited_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name])
   # If you have extra params to permit, append them to the sanitizer.
