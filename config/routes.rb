@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   devise_scope :customer do
       post 'customers/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
-  
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
-  
+
   scope module: :public do
     get '/search' => 'posts#search'
-    get 'homes/top'
+    # get 'homes/top'
     get "/customers/withdraw" => "customers#withdraw"
     resources :customers, only: [:show, :edit, :update] do
       get :favorites, on: :collection
@@ -29,9 +29,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/top'
     resources :customers
-    resources :posts 
+    resources :posts
     resources :tags, only: [:destroy]
     resources :favorites
     resources :comments
   end
+
+  root to: 'public/homes#top'
 end

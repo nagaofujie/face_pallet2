@@ -23,17 +23,17 @@ class Public::SessionsController < Devise::SessionsController
   def guest_sign_in
     customer = Customer.guest
     sign_in customer
-    redirect_to homes_top_path, notice: 'successfully logged in as a guest'
+    redirect_to root_path, notice: 'successfully logged in as a guest'
   end
   
   private
   
     def after_sign_in_path_for(resource)
-          homes_top_path
+          root_path
     end
     
     def after_sign_out_path_for(resource)
-          homes_top_path
+          root_path
     end
 
 

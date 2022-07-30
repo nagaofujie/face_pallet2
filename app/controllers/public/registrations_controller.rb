@@ -38,7 +38,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
- 
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
@@ -60,22 +60,22 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
   def ensure_normal_customer
     if resource.email == 'guest@example.com'
-      redirect_to homes_top_path, alert: 'Guest users cannot be deleted'
+      redirect_to root_path, alert: 'Guest users cannot be deleted'
     end
   end
-  
+
    private
 
     def after_sign_in_path_for(resource)
-        homes_top_path
+        root_path
     end
-    
+
     def after_sign_out_path_for(resource)
-         homes_top_path
+         root_path
     end
 
    protected
-   
+
    def configure_permited_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name])
    end
