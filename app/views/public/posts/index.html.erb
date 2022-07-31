@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <% if !@result_posts.nil? %> 
+        <% if !@result_posts.nil? %>
             <div class="col-md-8 mt-5 ">
                 <div class="col-md-12"><h2 class="mb-5"><strong>検索結果</strong></h2>
                     <% @result_posts.each do |post| %>
@@ -10,8 +10,8 @@
                 </div>
             </div>
         <% else %>
-            <div class="col-md-4 mt-5 "> 
-                <strong><h1 class="text-info">Tags</h1></strong>
+            <div class="col-md-4 mt-5 ">
+                <strong><h1 class="text-info mb-5">Tags</h1></strong>
                     <% @tag_list.each do |list|%>
                         <h2>#<%= link_to list.name, search_tag_path(tag_id: list.id) %>
                             <%="(#{list.posts.count})" %>
@@ -27,7 +27,7 @@
                                 <div class="col-md-12 mt-5"><%= image_tag post.get_image(200,200) %></div>
                                 </div>
                             <% end %>
-                             
+
                                 <div class="col-md-7 mt-5">
                                     <div class="col-md-12 mt-5">title:　<%= post.title %></div>
                                     <div class="col-md-12 mt-5">introduction:　<%= post.introduction %></div>

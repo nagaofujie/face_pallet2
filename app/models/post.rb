@@ -45,10 +45,27 @@ class Post < ApplicationRecord
     end
  end
 
-def self.search(keyword)
-  where(["title like? OR introduction like?", "%#{keyword}%", "%#{keyword}%"])
-end
+    def self.search(keyword)
+        # Postからタイトルまたは説明からあいまい検索
+        posts = Post.where(["title LIKE ? OR introduction LIKE ?", "%#{keyword}%", "%#{keyword}%"])
 
+        # Tagからnameをあいまい検索
+        tags = Tag.where(["name LIKE ? ", "%#{keyword}%"])
 
+        # 空のidを入れる配列を用意
+        post_ids = []
+
+        # post_idsにPostから検索した結果のIDたちを入れる
+        post_ids += posts.ids
+
+        # タグのあいまい検索をしたものをループする
+        tags.each do |tag|
+            # ループしたタグに関連づいている記事をpost_idsに次々と入れる
+            post_ids += tag.posts.ids
+        end
+
+        # 自分自身(Postモデル)からpost_idsのuniqメソッドで重複を除いたものをすべて取得して返す
+        Post.where(id: post_ids.uniq)
+    end
 
 end
