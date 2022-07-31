@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     get '/search' => 'posts#search'
-    # get 'homes/top'
+    get "/customers/mypage" => "customers#mypage"
     get "/customers/withdraw" => "customers#withdraw"
     resources :customers, only: [:show, :edit, :update] do
       get :favorites, on: :collection

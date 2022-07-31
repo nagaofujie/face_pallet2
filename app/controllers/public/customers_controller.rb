@@ -5,9 +5,14 @@ class Public::CustomersController < ApplicationController
 def show
     @customer = Customer.find(params[:id])
     @posts = @customer.posts
-    favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
-    @favorite_list = Post.find(favorites)
-
+    @favorites_count = 0
+    @posts.each do |post|
+           @favorites_count += post.favorites.count
+    end
+    @comments_count = 0
+        @posts.each do |post|
+            @comments_count += post.comments.count
+    end
 end
 
 def edit
@@ -35,6 +40,22 @@ def withdraw
     @customer.update(is_deleted: true)
     reset_session
     redirect_to new_customer_session_path
+    end
+end
+
+def mypage
+    @customer = current_customer
+    @posts = @customer.posts
+        favorites = Favorite.where(customer_id: current_customer.id).pluck(:post_id)
+    @favorite_list = Post.find(favorites)
+
+    @favorites_count = 0
+    @posts.each do |post|
+           @favorites_count += post.favorites.count
+    end
+    @comments_count = 0
+        @posts.each do |post|
+            @comments_count += post.comments.count
     end
 end
 

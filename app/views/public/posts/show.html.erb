@@ -1,42 +1,50 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mt-5 ">
-        <div class="col-md-12"><h2 class= "mb-5"><%= @post.title%></h2></div>
+        <div class="col-md-12"><h2 class= "mb-5"><%= @post.title %></h2></div>
         <div class="col-md-12"><%= image_tag @post.get_image(500,500) %></div>
         <div class="col-md-12"><h4 class="text-center mt-5 mb-5"><%= @post.introduction %></h4></div>
-        <div class="row">    
+        <div class="row">
             <div class="col-md-6 mt-5">
                 <% @tags.each do |tag| %>
-                <h5>#<%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
+                <h5 class="text-secondary">#<%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
                 <% end %>
             </div>
             <div class="col-md-6 mt-5">
-                <%= link_to customer_path(@post.customer.id) do %>
-                <h5><i class="fas fa-user"></i>　
-                <%= @post.customer.full_name%>
+              <% if @post.customer == current_customer %>
+                <%= link_to customers_mypage_path do %>
+                  <h5 class="text-secondary"><i class="fas fa-user"></i>
+                    <%= @post.customer.full_name %>
+                  </h5>
                 <% end %>
-                </h5>
-            </div> 
-        </div> 
+              <% else %>
+                <%= link_to customer_path(@post.customer.id) do%>
+                  <h5 class="text-secondary"><i class="fas fa-user"></i>
+                    <%= @post.customer.full_name %>
+                  </h5>
+                <% end %>
+              <% end %>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-5"> <% if @post.favorited?(current_customer) %>
-                    <%= link_to post_favorite_path(@post.id), method: :delete do %>
-                      <span style="color:red;">❤︎</span>
-                    <% end %>
-                  <% else %>
+            <div class="col-md-5">
+              <% if @post.favorited?(current_customer) %>
+                <%= link_to post_favorite_path(@post.id), method: :delete do %>
+                  <span style="color:red;">❤︎</span>
+                <% end %>
+              <% else %>
                     <%= link_to post_favorites_path(@post.id), method: :post do %>
                       <span>❤︎</span>
                     <% end %>
-                  <% end %>
-                  <span><%= "(#{@post.favorites.count})"%> </span></div>
-                  
-                      <% if @post.customer == current_customer %>
+              <% end %>
+                <span><%= "(#{@post.favorites.count})"%> </span></div>
+                  <% if @post.customer == current_customer %>
                     <div class="col-md-3 mt-5"><%= link_to "Edit", edit_post_path(@post.id), class: "btn btn-primary mb-5 ml-5" %></div>
-                     <div class="col-md-3 mt-5"><%= link_to "Destroy", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger mb-5" %></div>
+                    <div class="col-md-3 mt-5"><%= link_to "Destroy", post_path(@post.id), method: :delete, data: {confirm: "削除しますか？"}, class: "btn btn-danger mb-5" %></div>
                   <% else %>
                     <div></div>
                   <% end %>
-                  
+
                 <div class="row">
                     <div class="col-md-12 mt-5 ">
                         <%= form_with model:[@post, @comment], method: :post do |f| %>
@@ -61,12 +69,12 @@
            <% end %>
          </div>
       <%= paginate @comments %>
-    </div>     
+    </div>
   </div>
 </div>
 <style>
- 
- .container{ background-image: url("<%= asset_path('IMG_4449.PNG') %>");　
+
+ .container{ background-image: url("<%= asset_path('IMG_4449.PNG') %>");
       background-size:cover;
       background-position: center;
       background-color:rgba(255,255,255,0.8);
@@ -76,6 +84,6 @@
     font-size:40px;
     padding:0;
   }
-  
+
 
  </style>

@@ -1,51 +1,32 @@
-  <div class="container">
-    <div class="row">
-      
-      <div class="col-lg-5 mt-5 mb-3">
-        <div class="col-lg-12 mt-5 mb-3"><h2><%= @customer.full_name %></h2></div>
-            <div class="col-lg-12 mt-5"><%= image_tag @customer.get_image(200,200) %></div>
-            <% if @customer == current_customer %>
-              <div class="col-lg-12"><%= link_to "My posts",  post_myposts_path(@posts), class: "btn btn-info mt-5" %>
-            <% end %>
-              </div>
-              
-            <% if @customer.email != 'guest@example.com' && @customer == current_customer %>
-              <div class="col-lg-12"><%= link_to "Edit",edit_customer_path(@customer.id), class: "btn btn-success mt-5" %></div>
-            <% else %>
-              <div></div>
-            <% end %>
-      </div>
-      <div class="col-lg-7 mt-5 mb-3">  
-        <div class="col-lg-12 mb-5">
-            <h2>My Favolite List<%= "(#{@favorite_list.count})" %></h2>
-        </div>
-          <div class="col-lg-12">
-            <% if @favorite_list.present? %>
-              <% @favorite_list.each do |post|%>
-                <%= link_to post_path(post.id) do %>
-                <%= image_tag post.get_image(100,100) %>
-              <% end %>
-                <% end %>
-            <% end %>
-          </div>
-      </div>
-  </div>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 mt-5">
+        <%= image_tag @customer.get_image(200,200), class: "rounded-circle" %>
+          <h4 class="mt-5 mb-5 text-secondary"><%= @customer.full_name %></h4><br>
+            <div class="ml-4">
+              <h4 class="text-secondary">
+                  <i class="far fa-heart"></i><%= @favorites_count %> |
+                  <i class="far fa-comments"></i> <%= @comments_count%>
+              </h4>
+            </div>
+    </div>
 
-<style>
-  
-  .container{ background-image: url("<%= asset_path('IMG_4443.PNG') %>");　
-    background-size:cover;
-  	background-repeat: no-repeat;
-    background-position: center;
-    background-color:rgba(255,255,255,0.8);
-    background-blend-mode:lighten;
-    width:1400px;
-    height:1400px;
-   }
-   .h2{
-     width: 250px;
-     margin-right:0;
-   }
- 
-</style>
+    <div class="col-md-7">
+      <h2 class="mt-5 mb-5 text-center text-secondary">Post List</h2>
+        <div class="col-md-12 d-flex">
+          <% @posts.each do |post| %>
+              <div class="col-md-3 align-items-stretch">
+                <%= link_to post_path(post.id) do %>
+                  <%= image_tag post.get_image(200,200) %>
+                <% end %><br>
+                  <%= link_to post.title, post_path(post.id) , class: "text-secondary"%>
+              </div>
+          <% end %>
+        </div>
+    </div>
+
+    <style>
+
+
+
+    </style>

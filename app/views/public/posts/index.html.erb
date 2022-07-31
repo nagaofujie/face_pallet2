@@ -1,19 +1,21 @@
 <div class="container">
     <div class="row">
         <% if !@result_posts.nil? %>
-            <div class="col-md-8 mt-5 ">
-                <div class="col-md-12"><h2 class="mb-5"><strong>検索結果</strong></h2>
-                    <% @result_posts.each do |post| %>
-                        <%= image_tag post.get_image(200,200) %><br>
-                        <strong><%= link_to post.title, post_path(post.id) %></strong>
-                    <% end %>
-                </div>
+            <div class="col-md-12">
+                <h2 class="mb-5 mt-5"><strong>Search Results</strong></h2>
             </div>
+                <% @result_posts.each do |post| %>
+                  <div class="col-md-2">
+                    <%= image_tag post.get_image(200,200) %><br>
+                    <strong><%= link_to post.title, post_path(post.id) %></strong>
+                  </div>
+                <% end %>
+
         <% else %>
             <div class="col-md-4 mt-5 ">
                 <strong><h1 class="text-info mb-5">Tags</h1></strong>
                     <% @tag_list.each do |list|%>
-                        <h2>#<%= link_to list.name, search_tag_path(tag_id: list.id) %>
+                        <h2 class="text-secondary">#<%= link_to list.name, search_tag_path(tag_id: list.id) %>
                             <%="(#{list.posts.count})" %>
                         </h2>
                     <% end %>
@@ -29,14 +31,14 @@
                             <% end %>
 
                                 <div class="col-md-7 mt-5">
-                                    <div class="col-md-12 mt-5">title:　<%= post.title %></div>
-                                    <div class="col-md-12 mt-5">introduction:　<%= post.introduction %></div>
+                                    <div class="col-md-12 mt-5"><strong>title:　</strong><%= post.title %></div>
+                                    <div class="col-md-12 mt-5"><strong>introduction:　</strong><%= post.introduction %></div>
                                 </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5 mt-5 ml-3"><i class="fas fa-user"></i><%= post.customer.full_name %></div>
-                            <div class="col-md-2 mt-5"><i class="fas fa-comment"></i><%= "(#{post.comments.count})" %></div>
-                            <div class="col-md-2 mt-5"><i class="fas fa-heart"></i><%= "(#{post.favorites.count})" %></div>
+                            <div class="col-md-5 mt-5 ml-3"><i class="fas fa-user"></i> <%= post.customer.full_name %></div>
+                            <div class="col-md-2 mt-5"><i class="fas fa-comment"></i> <%= "(#{post.comments.count})" %></div>
+                            <div class="col-md-2 mt-5"><i class="fas fa-heart"></i> <%= "(#{post.favorites.count})" %></div>
                         </div>
                     <% end %>
             <%= paginate @posts %>

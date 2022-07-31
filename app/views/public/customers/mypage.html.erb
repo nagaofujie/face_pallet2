@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg-5 mt-5 mb-3">
+          <%= image_tag current_customer.get_image(200,200), class: "rounded-circle" %>
+            <h2 class="text-secondary mt-5 ml-2">
+              <div class="ml-2"><i class="far fa-user"></i> <%= current_customer.full_name %></div>
+            </h2>
+              <div class="ml-4 mt-5">
+                <h4 class="text-secondary">
+                  <i class="far fa-heart"></i><%= @favorites_count %> |
+                  <i class="far fa-comments"></i> <%= @comments_count%>
+                </h4>
+              </div>
+            <% if @customer == current_customer %>
+              <%= link_to "My posts",  post_myposts_path(@posts), class: "btn btn-info mt-5" %>
+            <% end %>
+
+            <% if @customer.email != 'guest@example.com' && @customer == current_customer %>
+              <%= link_to "Edit",edit_customer_path(@customer.id), class: "btn btn-success mt-5" %>
+            <% else %>
+              <div></div>
+            <% end %>
+      </div>
+
+      <div class="col-lg-7 mt-5 mb-3">
+        <h2 class="mb-5 text-secondary text-center">My Favolite List<%= " (#{@favorite_list.count})" %></h2>
+          <% if @favorite_list.present? %>
+            <% @favorite_list.each do |post|%>
+              <%= link_to post_path(post.id) do %>
+              <%= image_tag post.get_image(250,250) %>
+              <% end %>
+            <% end %>
+          <% end %>
+      </div>
+  </div>
+</div>
+
+<style>
+
+  .container{ background-image: url("<%= asset_path('IMG_4443.PNG') %>");
+    background-size:cover;
+  	background-repeat: no-repeat;
+    background-position: center;
+    background-color:rgba(255,255,255,0.8);
+    background-blend-mode:lighten;
+    width:1400px;
+    height:1400px;
+   }
+   .h2{
+     width: 250px;
+     margin-right:0;
+   }
+
+</style>

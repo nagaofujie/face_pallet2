@@ -16,12 +16,12 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-info">
            <%= link_to "Face Pallet", root_path, class: "navbar-brand" %>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span ><%= image_tag current_customer.get_image(50,50) %></span>
+                <span ><%= image_tag current_customer.get_image(50,50), class: "rounded-circle"  %></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
-                    <%= link_to "Your Information",customer_path(current_customer.id), class:"nav-link" %>
+                    <%= link_to "Your Information",customers_mypage_path, class:"nav-link" %>
                   </li>
                   <li class="nav-item active">
                     <%= link_to "Create Post", new_post_path, class:"nav-link" %>
