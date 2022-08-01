@@ -9,13 +9,13 @@ before_action :authenticate_customer!, only: [:create, :edit, :update, :destroy,
 
     def search
        @result_posts = Post.search(params[:keyword])
-       @tag_list = Tag.all
+       @tag_list = Tag.all.order(created_at: :desc)
        @keyword = params[:keyword]
        render 'index'
     end
 
     def myposts
-        @posts = current_customer.posts.page(params[:page]).per(5)
+        @posts = current_customer.posts.page(params[:page]).per(5).order(created_at: :desc)
         @customer = current_customer
     end
 
@@ -37,15 +37,15 @@ before_action :authenticate_customer!, only: [:create, :edit, :update, :destroy,
     end
 
     def index
-        @posts = Post.page(params[:page]).per(5)
-        @tag_list = Tag.page(params[:page]).per(20)
+        @posts = Post.page(params[:page]).per(5).order(created_at: :desc)
+        @tag_list = Tag.page(params[:page]).per(20).order(created_at: :desc)
     end
 
     def show
         @post = Post.find(params[:id])
         @tags = @post.tags
         @comment = Comment.new
-        @comments = @post.comments.page(params[:page]).per(6)
+        @comments = @post.comments.page(params[:page]).per(6).order(created_at: :desc)
 
     end
 

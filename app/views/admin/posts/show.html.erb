@@ -2,21 +2,21 @@
   <div class="row">
     <div class="col-lg-6">
       <h2 class="pl-5 ml-5 mt-5"><%= @post.title%></h2>
-      <div class="mt-5 mb-5">
-        <%= link_to admin_comment_path(@post.customer.id) do %>
-          <%= image_tag @post.customer.get_image(500,500)%>
-        <% end %>
-      </div>
-      <h4 class="mt-5 mb-5"><%= @post.introduction %></h4>
-      <% @post_tags.each do |tag| %>
-        #<%= tag.name %>
-      <% end %>
-        <div class="d-flex justify-content-between">
-          <h5 class="mt-5">投稿者:<%= link_to @post.customer.full_name, admin_customer_path(@post.customer.id) %></h5>
-          <div><%= link_to "投稿削除", admin_post_path(@post.id), method: :delete, class: "btn btn-danger d-inline" %></div>
+        <div class="mt-5 mb-5">
+          <%= link_to admin_comment_path(@post.customer.id) do %>
+            <%= image_tag @post.customer.get_image(500,500)%>
+          <% end %>
         </div>
-      </div>
-      
+        <h4 class="mt-5 mb-5"><%= @post.introduction %></h4>
+          <% @post_tags.each do |tag| %>
+            <i class="fas fa-hashtag"></i><%= tag.name %>
+          <% end %>
+            <div class="d-flex justify-content-between">
+              <h5 class="mt-5">投稿者:<%= link_to @post.customer.full_name, admin_customer_path(@post.customer.id) %></h5>
+              <div><%= link_to "投稿削除", admin_post_path(@post.id), method: :delete, class: "btn btn-danger d-inline" %></div>
+            </div>
+    </div>
+
       <div class="col-lg-6">
         <% @comments.each do |comment| %>
           <div class="box2">

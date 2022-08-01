@@ -1,9 +1,9 @@
 <div class="container">
-    <h2 class="mt-5 mb-3"><strong>タグが#<%=@tag.name%>の投稿一覧</strong></h2>
+    <h2 class="mt-5 mb-3"><strong>タグが<i class="fas fa-hashtag"></i><%=@tag.name%>の投稿一覧</strong></h2>
 
 
     <% @tag_list.each do |list|%>
-    <h4>#<%=link_to list.name,search_tag_path(tag_id: list.id) %>
+    <h4><i class="fas fa-hashtag"></i><%=link_to list.name,search_tag_path(tag_id: list.id) %>
     <%="(#{list.posts.count})" %></h4><% end %>
 
       <% @posts.each do |post| %>

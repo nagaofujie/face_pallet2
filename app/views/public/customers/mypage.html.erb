@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
       <div class="col-lg-5 mt-5 mb-3">
-          <%= image_tag current_customer.get_image(200,200), class: "rounded-circle" %>
+          <%= image_tag current_customer.get_image(200,200), class: "rounded-circle ml-5" %>
             <h2 class="text-secondary mt-5 ml-2">
-              <div class="ml-2"><i class="far fa-user"></i> <%= current_customer.full_name %></div>
+              <div class="ml-2"><i class="fas fa-user"></i> <%= current_customer.full_name %></div>
             </h2>
-              <div class="ml-4 mt-5">
+              <div class="ml-5 mt-5">
                 <h4 class="text-secondary">
                   <i class="far fa-heart"></i><%= @favorites_count %> |
                   <i class="far fa-comments"></i> <%= @comments_count%>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="col-lg-7 mt-5 mb-3">
-        <h2 class="mb-5 text-secondary text-center">My Favolite List<%= " (#{@favorite_list.count})" %></h2>
+        <h2 class="mb-5 text-secondary text-center"><i class="fab fa-gratipay"></i> My Favolite List<%= " (#{@favorite_list.count})" %></h2>
           <% if @favorite_list.present? %>
             <% @favorite_list.each do |post|%>
               <%= link_to post_path(post.id) do %>

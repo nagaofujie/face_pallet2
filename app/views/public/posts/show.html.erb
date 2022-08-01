@@ -1,13 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mt-5 ">
-        <div class="col-md-12"><h2 class= "mb-5"><%= @post.title %></h2></div>
-        <div class="col-md-12"><%= image_tag @post.get_image(500,500) %></div>
-        <div class="col-md-12"><h4 class="text-center mt-5 mb-5"><%= @post.introduction %></h4></div>
+        <h2 class= "mb-5 ml-5"><%= @post.title %></h2>
+        <%= image_tag @post.get_image(500,500) %>
+        <h4 class=" mt-5 mb-5"><%= @post.introduction %></h4>
         <div class="row">
             <div class="col-md-6 mt-5">
                 <% @tags.each do |tag| %>
-                <h5 class="text-secondary">#<%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
+                <h5 class="text-secondary"><i class="fas fa-hashtag"></i><%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
                 <% end %>
             </div>
             <div class="col-md-6 mt-5">
