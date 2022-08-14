@@ -1,4 +1,7 @@
 <div class="container">
+    <div class="text-success text-right">
+        <%= flash[:notice] %>
+    </div>
     <div class="row">
         <% if !@result_posts.nil? %>
             <div class="col-md-12">
@@ -10,7 +13,6 @@
                     <strong><%= link_to post.title, post_path(post.id) %></strong>
                   </div>
                 <% end %>
-
         <% else %>
             <div class="col-md-4 mt-5 ">
                 <strong><h1 class="text-info mb-5"><i class="fas fa-tag"></i>Tags</h1></strong>

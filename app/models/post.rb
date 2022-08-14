@@ -8,9 +8,9 @@ class Post < ApplicationRecord
     has_many :tags, through: :post_tags
 
     validates :title,
-        length: { minimum: 1, maximun: 25}, presence: true
+        length: { minimum: 1, maximun: 50}, presence: true
     validates :introduction,
-        length: { minimum: 1, maximum: 140}, presence: true
+        length: { minimum: 1, maximum: 500}, presence: true
     validates :image,
         presence: true
 

@@ -11,11 +11,11 @@
               <strong><%= f.label :password, class: "mr-3" %></strong>
               <%= f.password_field :password, autocomplete: "current-password", size: "30x5" %>
             </div>
-        </div>
-            <div class="col-md-12 offset-md-5 mb-5">
+            <div class="col-md-12 offset-md-4 mb-5">
               <%= f.submit "Log in", class: "btn btn-success" %>
             </div>
           <% end %>
+        </div>
           <h2 class="text-center mt-5 mb-5 mr-5">OR</h2>
             <div class="col-md-12 offset-md-5 mb-5">
               <%= link_to "Guest Log In" , customers_guest_sign_in_path, method: :post, class: "btn btn-info" %>

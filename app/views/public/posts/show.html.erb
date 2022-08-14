@@ -1,11 +1,18 @@
+<div class="text-success">
+        <%= flash[:notice] %>
+</div>
+<div class="text-danger">
+        <%= flash[:alret] %>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-md-6 mt-5 ">
-        <h2 class= "mb-5 ml-5"><%= @post.title %></h2>
-        <%= image_tag @post.get_image(500,500) %>
-        <h4 class=" mt-5 mb-5"><%= @post.introduction %></h4>
-        <div class="row">
-            <div class="col-md-6 mt-5">
+        <h2 class= "mb-5 ml-5 pl-5"><strong><%= @post.title%></strong></h2>
+          <h6 class="text-right mr-5"><%= @post.created_at.strftime('%Y/%m/%d') %></h6>
+          <%= image_tag @post.get_image(500,500) %>
+          <h4 class=" mt-5 mb-5"><%= @post.introduction %></h4>
+          <div class="row">
+            <div class="col-md-6 mt-5 mb-5">
                 <% @tags.each do |tag| %>
                 <h5 class="text-secondary"><i class="fas fa-hashtag"></i><%= link_to tag.name, search_tag_path(tag_id: tag.id) %></h5>
                 <% end %>
@@ -27,7 +34,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5 mt-5">
               <% if @post.favorited?(current_customer) %>
                 <%= link_to post_favorite_path(@post.id), method: :delete do %>
                   <span style="color:red;">❤︎</span>
@@ -48,16 +55,16 @@
                 <div class="row">
                     <div class="col-md-12 mt-5 ">
                         <%= form_with model:[@post, @comment], method: :post do |f| %>
-                             <div class="col-md-12"><%= f.text_area :comment_content,  size: "50x5" %></div>
+                             <div class="col-md-12"><%= f.text_area :comment_content,  size: "50x5", placeholder: "140 characters or less" %></div>
                              <div class="col-md-12"><%= f.hidden_field :post_id, value: @post.id %></div>
-                             <div class="col-md-12 mt-3"><%= f.submit "Create Comment", class: "btn btn-success mb-5 "%></div>
+                             <div class="col-md-12 mt-3 text-center"><%= f.submit "Create Comment", class: "btn btn-success mb-5 "%></div>
                           <% end %>
                     </div>
                 </div>
         </div>
     </div>
     <div class="col-md-6 mt-5 ">
-      <div class="col-md-12  "><h2 class="text-center mb-5">Comments<%="(#{@comments.count})"%></h2></div>
+      <div class="col-md-12"><h2 class="text-center mb-5">Comments<%="(#{@comments.count})"%></h2></div>
          <div class="row">
           <% @comments.each do |comment| %>
             <div class="col-md-3 mb-5 "><%= link_to customer_path(comment.customer.id) do %>
@@ -65,7 +72,9 @@
                <% end %><br>
             <i class="fas fa-user"></i> <%= comment.customer.full_name %>
             </div>
-            <div class="col-md-9 mb-3"><h4><i class="fas fa-comment"></i><%= comment.comment_content %></h4></div>
+            <div class="col-md-9 mb-3"><h4><i class="fas fa-comment"></i><%= comment.comment_content %></h4>
+              <p class="text-right mr-5"><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+            </div>
            <% end %>
          </div>
       <%= paginate @comments %>

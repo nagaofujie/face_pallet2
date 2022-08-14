@@ -25,9 +25,11 @@ before_action :authenticate_customer!, only: [:create, :edit, :update, :destroy,
         @post.customer_id = current_customer.id
         tag_list = params[:name].split(nil)
      if @post.save
+         flash[:notice] = "Posted successfully"
         @post.save_tag(tag_list)
         redirect_to posts_path
      else
+        flash[:alret] = "Failed to post"
         render :new
      end
     end
@@ -51,13 +53,15 @@ before_action :authenticate_customer!, only: [:create, :edit, :update, :destroy,
 
     def edit
         @post = Post.find(params[:id])
+        unless @post.customer == current_customer
+            redirect_to post_path
+        end
         @tag_list = @post.tags.pluck(:name).join(" ")
     end
 
     def update
         @post = Post.find(params[:id])
         tag_list = params[:post][:name].split(" ")
-
         if @post.update(post_params)
                 @old_relations = PostTag.where(post_id: @post.id)
                 @old_relations.each do |relation|
